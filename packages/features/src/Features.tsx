@@ -1,11 +1,11 @@
 import React from 'react';
 import { Button } from 'common';
 
-export function App1() {
+export function Features() {
   return (
     <div>
-      <h1>App 1</h1>
-      <Button text='App1 Button test' />
+      <h1>Features</h1>
+      <Button text='Features: Button' />
     </div>
   );
 }

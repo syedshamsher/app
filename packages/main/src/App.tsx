@@ -1,14 +1,12 @@
 import React from 'react';
 import './App.css';
-import { App1 } from 'app1';
-import { App2 } from 'app2';
+import { Features } from 'features';
 
 function App() {
   return (
     <div>
       <h1>Main App</h1>
-      <App1 />
-      <App2 />
+      <Features />
     </div>
   );
 }
