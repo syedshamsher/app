@@ -126,15 +126,15 @@ export function Features() {
     });
   }
 
-  // const renderPagination = () => (
-  //   <div className={"pagination"}>
-  //     <button onClick={() => setCurrentPage(currentPage - 1)}>Previous</button>
-  //     {Array.from({ length: Math.ceil(filteredData.length / entries) }).map((_, index) => (
-  //       <button key={index} onClick={() => setCurrentPage(index + 1)}>{index + 1}</button>
-  //     ))}
-  //     <button onClick={() => setCurrentPage(currentPage + 1)}>Next</button>
-  //   </div>
-  // )
+  const renderPagination = () => (
+    <div className={"pagination"}>
+      <button onClick={() => setCurrentPage(currentPage - 1)}>Previous</button>
+      {Array.from({ length: Math.ceil(filteredData.length / entries) }).map((_, index) => (
+        <button key={index} onClick={() => setCurrentPage(index + 1)}>{index + 1}</button>
+      ))}
+      <button onClick={() => setCurrentPage(currentPage + 1)}>Next</button>
+    </div>
+  )
 
 
 
@@ -153,8 +153,7 @@ export function Features() {
         renderTableRows()
       }
       Pagination={
-        <></>
-        // renderPagination()
+        renderPagination()
       }
     />
   );
