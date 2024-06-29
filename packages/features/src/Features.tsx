@@ -49,7 +49,7 @@ export function Features() {
   const renderTableHeader = () => {
     return (
       <tr>
-        {Object.keys(data[0])?.map((key) => {
+        {data[0] && Object.keys(data[0])?.map((key) => {
           console.log(key);
           return (
             <th key={key} >
@@ -75,7 +75,7 @@ export function Features() {
   const renderTableFilters = () => {
     return (
       <tr>
-        {Object.keys(data[0])?.map((key) => {
+        {data[0] && Object.keys(data[0])?.map((key) => {
           return (
             <td key={key}>
               {filterableColumns?.find((column) => column === key) && (
@@ -126,15 +126,15 @@ export function Features() {
     });
   }
 
-  const renderPagination = () => (
-    <div className={"pagination"}>
-      <button onClick={() => setCurrentPage(currentPage - 1)}>Previous</button>
-      {Array.from({ length: Math.ceil(filteredData.length / entries) }).map((_, index) => (
-        <button key={index} onClick={() => setCurrentPage(index + 1)}>{index + 1}</button>
-      ))}
-      <button onClick={() => setCurrentPage(currentPage + 1)}>Next</button>
-    </div>
-  )
+  // const renderPagination = () => (
+  //   <div className={"pagination"}>
+  //     <button onClick={() => setCurrentPage(currentPage - 1)}>Previous</button>
+  //     {Array.from({ length: Math.ceil(filteredData.length / entries) }).map((_, index) => (
+  //       <button key={index} onClick={() => setCurrentPage(index + 1)}>{index + 1}</button>
+  //     ))}
+  //     <button onClick={() => setCurrentPage(currentPage + 1)}>Next</button>
+  //   </div>
+  // )
 
 
 
@@ -153,7 +153,8 @@ export function Features() {
         renderTableRows()
       }
       Pagination={
-        renderPagination()
+        <></>
+        // renderPagination()
       }
     />
   );
