@@ -1,3 +1,9 @@
+.features {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
 .table-head {
     display: flex;
     align-items: center;
@@ -19,4 +25,15 @@
     align-items: center;
     margin-top: 20px;
     flex-wrap: wrap;
+}
+
+.select-entries {
+    width: 100px;
+}
+
+.entries-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
 }

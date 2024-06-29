@@ -28,6 +28,8 @@ export function Features() {
     "region",
   ]);
   const [entries, setEntries] = useState<number>(5);
+  const [pageSize, setPageSize] = useState<number>(5);
+
   useEffect(() => {
     axios.get("https://restcountries.com/v3.1/all").then((response) => {
       console.log(response?.data, "===> response");
@@ -57,13 +59,12 @@ export function Features() {
   };
 
   const renderTableHeader = () => {
-    const _data = findMaxKeysElement(data)
+    const _data = findMaxKeysElement(data);
     return (
       <tr>
         {_data &&
-          Object.keys(_data)?.map((key) => {
-            console.log(key);
-            return (
+          Object.keys(_data)?.map((key, index) =>
+            index < entries ? (
               <th key={key}>
                 <span className={"table-head"}>
                   {key}
@@ -77,19 +78,19 @@ export function Features() {
                   )}
                 </span>
               </th>
-            );
-          })}
+            ) : null
+          )}
       </tr>
     );
   };
 
   const renderTableFilters = () => {
-    const _data = findMaxKeysElement(data)
+    const _data = findMaxKeysElement(data);
     return (
       <tr>
         {_data &&
-          Object.keys(_data)?.map((key) => {
-            return (
+          Object.keys(_data)?.map((key, index) =>
+            index < entries ? (
               <td key={key}>
                 {filterableColumns?.find((column) => column === key) && (
                   <input
@@ -104,8 +105,8 @@ export function Features() {
                   />
                 )}
               </td>
-            );
-          })}
+            ) : null
+          )}
       </tr>
     );
   };
@@ -134,24 +135,28 @@ export function Features() {
   const renderTableRows = () => {
     const sortedData = getSortedData();
     const paginatedData = sortedData.slice(
-      (currentPage - 1) * entries,
-      currentPage * entries
+      (currentPage - 1) * pageSize,
+      currentPage * pageSize
     );
     // Function to render object value with ellipsis
     const renderObjectValue = (value: any) => {
       const stringValue = JSON.stringify(value);
-      return stringValue.length > 50 ? `${stringValue.slice(0, 50)}...` : stringValue;
-  };
-    return paginatedData?.map((item) => {
+      return stringValue.length > 50
+        ? `${stringValue.slice(0, 50)}...`
+        : stringValue;
+    };
+    return paginatedData?.map((item, index) => {
       return (
         <tr key={item.name.common}>
-          {Object.keys(item).map((key, index) => (
-            <td key={index} className="table-cell">
-              {typeof item[key as keyof Country] === "object"
-                ? renderObjectValue(item[key as keyof Country])
-                : String(item[key as keyof Country])}
-            </td>
-          ))}
+          {Object.keys(item).map((key, index) =>
+            index < entries ? (
+              <td key={index} className="table-cell">
+                {typeof item[key as keyof Country] === "object"
+                  ? renderObjectValue(item[key as keyof Country])
+                  : String(item[key as keyof Country])}
+              </td>
+            ) : null
+          )}
         </tr>
       );
     });
@@ -160,7 +165,7 @@ export function Features() {
   const renderPagination = () => (
     <div className={"pagination"}>
       <button onClick={() => setCurrentPage(currentPage - 1)}>Previous</button>
-      {Array.from({ length: Math.ceil(filteredData.length / entries) }).map(
+      {Array.from({ length: Math.ceil(filteredData.length / pageSize) }).map(
         (_, index) => (
           <button key={index} onClick={() => setCurrentPage(index + 1)}>
             {index + 1}
@@ -180,15 +185,32 @@ export function Features() {
   }
 
   return (
-    <DataTable
-      TableHeader={
-        <>
-          {renderTableHeader()}
-          {renderTableFilters()}
-        </>
-      }
-      TableBody={renderTableRows()}
-      Pagination={renderPagination()}
-    />
+    <div className={"features"}>
+      <div className={"entries-wrapper"}>
+        <span>Show</span>
+        <select
+          className="select-entries"
+          onChange={(e) => {
+            setEntries(Number(e.target.value));
+          }}
+        >
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="15">15</option>
+          <option value="20">20</option>
+        </select>
+        <span>Entries</span>
+      </div>
+      <DataTable
+        TableHeader={
+          <>
+            {renderTableHeader()}
+            {renderTableFilters()}
+          </>
+        }
+        TableBody={renderTableRows()}
+        Pagination={renderPagination()}
+      />
+    </div>
   );
 }
