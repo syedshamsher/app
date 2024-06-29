@@ -1,1 +1,1 @@
-export { Button } from './components';
+export { DataTable } from './components';

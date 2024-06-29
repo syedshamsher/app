@@ -9,10 +9,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "@types/axios": "^0.14.0",
     "@vitejs/plugin-react": "3.0.1",
-    "features": "*"
+    "axios": "^1.7.2",
+    "features": "*",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.26",

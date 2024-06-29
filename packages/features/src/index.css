@@ -1,0 +1,22 @@
+.table-head {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sort-button {
+    width: 15px;
+    height: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
