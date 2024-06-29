@@ -179,8 +179,6 @@ export function Features() {
     ));
   }
 
-  console.log(data, "===> data");
-
   return (
     <DataTable
       TableHeader={
